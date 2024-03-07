@@ -4,13 +4,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>pm2.5 table</title>
+    <style>
+        table {
+            width: 90%;
+            height: 300px;
+            text-align: center;
+            margin: 0 auto;
+            background-color: antiquewhite;
+            border-collapse: collapse;
+
+        }
+
+        body {
+            text-align: center;
+            background-color: burlywood;
+        }
+
+        th {
+            background-color: darkgoldenrod;
+            color: black;
+        }
+
+        td:nth-child(1) {
+            background-color: gold;
+        }
+
+        td:nth-child(3) {
+            background-color: hotpink;
+        }
+
+        .title {
+            background-color: coral;
+            color: brown;
+            display: inline-block;
+            border-radius: 12px;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>PM2.5全省數據</h1>
-    {{colunns}}
-    {{values}}
+    <h1 class="title">PM2.5全省數據</h1>
+    <!--{{colunns}}-->
+    <!--{{values}}-->
     <table border="1">
         <thead>
             <tr>
@@ -20,14 +56,13 @@
             </tr>
         </thead>
         <tbody>
+            {% for value in values %}
             <tr>
-                <td>信義</td>
-                <td>21</td>
+                {% for data in value %}
+                <td>{{data}}</td>
+                {% endfor %}
             </tr>
-            <tr>
-                <td>松山</td>
-                <td>19</td>
-            </tr>
+            {% endfor %}
         </tbody>
     </table>
 
