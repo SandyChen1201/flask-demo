@@ -14,8 +14,9 @@
     <table border="1">
         <thead>
             <tr>
-                <th>site</th>
-                <th>pm2.5</th>
+                {% for col in columns %}
+                <th>{{col}}</th>
+                {% endfor %}
             </tr>
         </thead>
         <tbody>
