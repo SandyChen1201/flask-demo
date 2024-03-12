@@ -3,83 +3,45 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+    <link rel="shortcut icon" href="#">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.2.2/echarts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/css/main.css">
 </head>
 
 <body>
-    <h1>PM2.5全省圖表</h1>
-    <div id="main" style="width: 600px;height:400px;"></div>
+    <div id="container">
+        <h1>全台PM2.5即時資訊</h1>
+        <div id="pm25_high_site" class="banner">
+            N/A
+        </div>
+        <div id="pm25_high_value" class="value"> PM2.5 :數值</div>
+        <div id="pm25_low_site" class="banner">
+            N/A
+        </div>
+        <div id="pm25_low_value" class="value"> PM2.5 :數值</div>
+    </div>
 
-    <script>
-        const myChart = echarts.init(document.getElementById('main'));
 
-        drawPM25();
+    <button id="update" class="button">
+        更新資料
+    </button>
 
-        function drawPM25() {
-            $.ajax(
-                {
-                    url: "/pm25-data",
-                    type: "GET",
-                    dataType: "json",
-                    success: (result) => {
-                        console.log(result);
-                        drawChart(myChart, result["datetime"], "pm2.5數值", result["site"], result["pm25"])
-                    },
-                    error: () => {
-                        console.log("error");
-                    }
-                }
-            )
-        }
 
-        function drawChart(chart, title, legend, xdata, ydata) {
+    <!-- 繪製區域 -->
+    <div id="main" style="width: 100%;height:500px;">
+    </div>
 
-            // 指定图表的配置项和数据
-            let option = {
-                title: {
-                    text: title
-                },
-                tooltip: {},
-                legend: {
-                    data: [legend]
-                },
-                xAxis: {
-                    data: xdata
-                },
-                yAxis: {},
-                series: [
-                    {
-                        name: legend,
-                        type: 'bar',
-                        data: ydata
-                    }
-                ]
-            };
+    <div id="six" style="width: 100%;height:400px;">
 
-            myChart.setOption(option);
-        }
-        // 使用刚指定的配置项和数据显示图表。
+    </div>
 
-        /*
-        const titleEL = document.querySelector("h1");
-        titleEL.innerText = "Test!";
-        titleEL.innerHTML = "<u>Test!</u>";
-        titleEL.addEventListener("click", () => {
-            alert("()內是放參數");
-        });
-        //ajax語法 : $
-        //1.後端寫好liburary main.py，要回傳承json格式
-        //2.前端pm25-chart.html要script $__ajax__
-        $("h1").text("PM2.5全省數據");
-        $("h1").html("<u>1233321</u>");
-        $("h1").css('color', 'blue');
-        $("h1").click(() => {
-            alert("test~jquery框架");
-        });
-        */
+
+    <a href="/">回首頁</a>
+    <script src="../static/js/main.js">
     </script>
 </body>
 
