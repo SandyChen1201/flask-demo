@@ -17,6 +17,26 @@ def get_pm25():
     return columns, values
 
 
+def get_county():
+    global df
+    if df is None:
+        df = pd.read_csv(url).dropna()
+
+    df1 = df.groupby("county").get_group("county")
+    columns = df1.columns.tolist()
+    values = df1.values.tolist()
+
+    return columns, values
+
+
+def get_countys():
+    global df
+    if df is None:
+        df = pd.read_csv(url).dropna()
+    countys = df["county"].unique()
+    return countys
+
+
 def get_six_pm25():
     # 指定全域端的 讀一次就好 if沒有就會重新載入
     global df

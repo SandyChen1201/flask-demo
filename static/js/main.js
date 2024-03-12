@@ -1,6 +1,7 @@
 // 取得主繪製區域
 const chart1 = echarts.init(document.getElementById('main'));
 const chart2 = echarts.init(document.getElementById('six'));
+const chart3 = echarts.init(document.getElementById('county'));
 
 
 
@@ -11,8 +12,37 @@ $("#update").click(() => {
     drawPM25();
 });
 
+
+//select 選擇option時的變動監聽 (Flask語法 val是value)
+$("#select_county").change(() => {
+    county = $("#select_county").val();
+    console.log(county);
+    drawCountyPM25(county);
+});
 // 呼叫後端資料跟繪製
 drawPM25();
+
+function drawCountyPM25(county) {
+    chart3.showLoading();
+    $.ajax(
+        {
+            url: `/county-pm25-data/${county}`,
+            type: "GET",
+            dataType: "json",
+            success: (result) => {
+                drawChat(chart3, county, "PM2.5", result["site"], result["pm25"]);
+                chart3.hideLoading();
+            },
+            //if fail
+            error: () => {
+                alert("Loading Failed, Please Try Again Later!");
+                chart3.hideLoading();
+            }
+        }
+    )
+}
+
+
 
 
 // 取得後端資料
@@ -58,6 +88,7 @@ function drawPM25() {
                 drawChat(chart1, result["datetime"], "PM2.5", result["site"], result["pm25"]);
                 chart1.hideLoading();
                 drawSixPM25();
+                drawCountyPM25(彰化縣);
             },
             //if fail
             error: () => {
