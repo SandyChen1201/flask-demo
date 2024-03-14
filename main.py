@@ -15,7 +15,7 @@ books = {1: "Python book", 2: "Java book", 3: "Flask book"}
 app = Flask(__name__)
 
 
-@app.route("/pm25-charts")
+@app.route("/pm25-charts-bulma")
 def pm25_charts():
     countys = get_countys()
     return render_template("pm25-charts.html", countys=countys)
