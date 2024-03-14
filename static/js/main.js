@@ -88,7 +88,7 @@ function drawPM25() {
                 drawChat(chart1, result["datetime"], "PM2.5", result["site"], result["pm25"]);
                 chart1.hideLoading();
                 drawSixPM25();
-                drawCountyPM25(彰化縣);
+                drawCountyPM25("彰化縣");
             },
             //if fail
             error: () => {
@@ -123,7 +123,6 @@ function drawChat(chart, title, legend, xData, yData) {
 
     chart.setOption(option);
 }
-
 
 
 

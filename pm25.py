@@ -17,12 +17,12 @@ def get_pm25():
     return columns, values
 
 
-def get_county():
+def get_county_pm25(county):
     global df
     if df is None:
         df = pd.read_csv(url).dropna()
 
-    df1 = df.groupby("county").get_group("county")
+    df1 = df.groupby("county").get_group(county)
     columns = df1.columns.tolist()
     values = df1.values.tolist()
 

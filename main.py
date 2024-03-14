@@ -1,6 +1,13 @@
 from flask import Flask, render_template
 from datetime import datetime
-from pm25 import get_pm25, get_six_pm25, six_countys, get_countys, get_county
+from pm25 import (
+    get_pm25,
+    get_six_pm25,
+    six_countys,
+    get_countys,
+    get_county_pm25,
+    six_countys,
+)
 import json
 
 books = {1: "Python book", 2: "Java book", 3: "Flask book"}
@@ -29,7 +36,7 @@ def six_pm25_data():
 
 @app.route("/county-pm25-data/<county>", methods=["GET"])  # 帶參數<>
 def county_pm25_data(county):
-    columns, values = get_county()
+    columns, values = get_county_pm25(county)
 
     site = [value[0] for value in values]
     pm25 = [value[2] for value in values]
